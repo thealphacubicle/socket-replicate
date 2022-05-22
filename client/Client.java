@@ -5,7 +5,7 @@ public class Client
 {
     //initialize socket and input/output streams
     private Socket socket;
-    private DataInputStream din;
+    private BufferedReader din;
     private DataOutputStream dout;
 
     // constructor
@@ -18,7 +18,8 @@ public class Client
             System.out.println("Connected to " + address + " on port " + port);
 
             // initialize input (recieve from terminal) and output streams through socket
-            din = new DataInputStream(System.in);
+            din =  new BufferedReader(
+                    new InputStreamReader(System.in));
             dout = new DataOutputStream(socket.getOutputStream());
         }
 
@@ -38,7 +39,7 @@ public class Client
         }
 
         String line = "";
-        
+
         // while the user does not type "exit"
         while(!line.equals("exit"))
         {
@@ -74,5 +75,4 @@ public class Client
     {
         Client client = new Client("127.0.0.1", 5000);
     }
-        
 }

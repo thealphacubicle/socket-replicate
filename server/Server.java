@@ -16,7 +16,7 @@ public class Server
         {
             // create a socket to connect to the server
             serverSocket = new ServerSocket(port);
-                System.out.println("Server is running...");
+            System.out.println("Server is running...");
 
             // wait for connection from client
             socket = serverSocket.accept();
@@ -25,15 +25,18 @@ public class Server
 
             // initialize input (recieve from terminal) and output streams through socket
             din = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-            dout = new DataOutputStream(socket.getOutputStream());
+            dout = new DataOutputStream(System.out);
 
-            String x = "";
-            
+            StringBuilder stringBuilder = new StringBuilder();
+
             //accept input while "over" is not entered
-            while(!din.readUTF().equals("over"))
+            while(!stringBuilder.toString().contains("over"))
             {
-                x = din.readUTF();
+                stringBuilder.append(din.readUTF());
             }
+
+            dout.writeUTF(stringBuilder.toString());
+            System.out.println();
         }
 
         catch(IOException ioe)
@@ -61,7 +64,7 @@ public class Server
             catch(IOException ioe)
             {
                 System.out.println("I/O Exception" +ioe);
-            }     
+            }
         }
     }
 
