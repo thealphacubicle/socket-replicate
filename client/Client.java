@@ -15,10 +15,11 @@ public class Client
         {
             // create a socket to connect to the server
             socket = new Socket(address, port);
+            System.out.println("Connected to " + address + " on port " + port);
 
             // initialize input (recieve from terminal) and output streams through socket
-            BufferedReader d = new BufferedReader(new InputStreamReader(in));
-              dout = new DataOutputStream(socket.getOutputStream());
+            din = new DataInputStream(System.in);
+            dout = new DataOutputStream(socket.getOutputStream());
         }
 
         catch(UnknownHostException e)

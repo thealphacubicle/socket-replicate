@@ -20,12 +20,15 @@ public class Server
 
             // wait for connection from client
             socket = serverSocket.accept();
+            System.out.println("Connected to " + socket.getInetAddress().getHostName());
+
 
             // initialize input (recieve from terminal) and output streams through socket
             din = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
             dout = new DataOutputStream(socket.getOutputStream());
 
             String x = "";
+            
             //accept input while "over" is not entered
             while(!din.readUTF().equals("over"))
             {
